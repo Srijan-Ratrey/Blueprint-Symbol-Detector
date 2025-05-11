@@ -1,0 +1,16 @@
+services:
+  - type: web
+    name: blueprint-detector
+    env: python
+    buildCommand: pip install -r backend/requirements.txt
+    startCommand: cd backend && uvicorn main:app --host 0.0.0.0 --port $PORT
+    envVars:
+      - key: API_BASE_URL
+        value: https://blueprint-detector.onrender.com
+      - key: PORT
+        value: 10000
+    buildFilter:
+      paths:
+        - backend/**
+    packages:
+      - poppler-utils 
