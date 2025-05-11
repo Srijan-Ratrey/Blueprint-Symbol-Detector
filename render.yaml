@@ -2,7 +2,7 @@ services:
   - type: web
     name: blueprint-detector
     env: python
-    buildCommand: pip install -r backend/requirements.txt
+    buildCommand: apt-get update && apt-get install -y poppler-utils && pip install -r backend/requirements.txt
     startCommand: cd backend && uvicorn main:app --host 0.0.0.0 --port $PORT
     envVars:
       - key: API_BASE_URL
@@ -12,5 +12,3 @@ services:
     buildFilter:
       paths:
         - backend/**
-    packages:
-      - poppler-utils 
